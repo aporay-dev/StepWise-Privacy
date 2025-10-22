@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StepWise Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #5856D6 0%, #7B68EE 100%);
+            border-radius: 22px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(88, 86, 214, 0.4);
+        }
+
+        h1 {
+            color: #5856D6;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #5856D6;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #5856D6;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #5856D6;
+            border-radius: 50%;
+        }
+
+        .feature-box {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #5856D6;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding-left: 50px;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #5856D6;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .steps strong {
+            color: #5856D6;
+            font-weight: 600;
+        }
+
+        .features-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .features-list li {
+            padding: 15px 0 15px 40px;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #5856D6;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .features-list strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: #5856D6;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .faq-answer {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #5856D6 0%, #7B68EE 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .contact-box p {
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .contact-box a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 30px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .contact-box a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #5856D6;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .privacy-note {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .privacy-note strong {
+            color: #3b82f6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .steps li {
+                padding-left: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-icon">👣</div>
+
+        <h1>StepWise Support</h1>
+        <p class="tagline">Your privacy-focused daily step tracker with beautiful visualizations</p>
+
+        <div class="section">
+            <h2 class="section-title">Getting Started</h2>
+            <div class="feature-box">
+                <ol class="steps">
+                    <li><strong>Grant HealthKit Permission:</strong> Open StepWise and allow access to Steps, Walking + Running Distance, and Active Energy data when prompted</li>
+                    <li><strong>Set Your Daily Goal:</strong> Customize your daily step goal in Settings (default: 10,000 steps)</li>
+                    <li><strong>Track Your Progress:</strong> Watch your beautiful circular progress ring fill up as you move throughout the day</li>
+                    <li><strong>View Your History:</strong> Explore weekly charts and historical trends in the History tab</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Features</h2>
+            <ul class="features-list">
+                <li><strong>Real-Time Step Tracking:</strong> Live updates from Apple HealthKit with smooth animations</li>
+                <li><strong>Animated Progress Ring:</strong> Beautiful circular visualization showing your daily progress</li>
+                <li><strong>Comprehensive Metrics:</strong> Track steps, distance (miles/km), and calories burned</li>
+                <li><strong>Weekly Charts:</strong> Interactive 7-day chart with tap-to-select functionality</li>
+                <li><strong>Historical Data:</strong> View your complete step history with statistics and trends</li>
+                <li><strong>Smart Notifications:</strong> Optional daily reminders to help you reach your goals <span class="badge">Optional</span></li>
+                <li><strong>Privacy First:</strong> All data stays on your device - no login, no tracking, no cloud sync</li>
+                <li><strong>Dark Theme:</strong> Elegant dark design optimized for OLED displays</li>
+                <li><strong>Premium Features:</strong> Ad-free experience with Weekly or Yearly subscription <span class="badge">Premium</span></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Why isn't my step count updating?</div>
+                <div class="faq-answer">
+                    Make sure you've granted StepWise permission to access HealthKit data. Go to iOS Settings → Health → Data Access & Devices → StepWise and ensure all permissions are enabled. Also verify that your iPhone is tracking steps (requires iPhone 5s or newer with M-series motion coprocessor).
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Does StepWise work with Apple Watch?</div>
+                <div class="faq-answer">
+                    Yes! StepWise reads data from Apple Health, which automatically syncs with Apple Watch. Any steps recorded on your watch will appear in StepWise.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I change my daily step goal?</div>
+                <div class="faq-answer">
+                    Absolutely! Go to Settings and adjust your daily goal to any value that works for you. The default is 10,000 steps, but you can customize it to match your fitness level.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is my health data shared or stored online?</div>
+                <div class="faq-answer">
+                    Never! StepWise is completely privacy-focused. All your health data stays on your device and is never transmitted to our servers or any third parties. We don't have user accounts, logins, or cloud storage.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What's included in the free version?</div>
+                <div class="faq-answer">
+                    The free version includes all core features: real-time step tracking, progress ring, metrics, weekly charts, and historical data. Free users see non-personalized ads that don't track you.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What do I get with Premium?</div>
+                <div class="faq-answer">
+                    Premium subscribers enjoy a completely ad-free experience. Choose Weekly ($1.99/week with 3-day free trial) or Yearly ($19.99/year - save 80%). Cancel anytime through your Apple ID settings.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How do I restore my subscription on a new device?</div>
+                <div class="faq-answer">
+                    Open StepWise → Settings → tap "Restore Purchases". Your subscription is tied to your Apple ID and will be restored automatically.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I export my step data?</div>
+                <div class="faq-answer">
+                    Your step data is stored in Apple Health. You can export all your health data directly from the Health app: Health → Profile (top right) → Export All Health Data.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Troubleshooting</h2>
+            <div class="feature-box">
+                <p><strong>Steps showing as zero:</strong></p>
+                <ul style="margin: 10px 0 20px 20px;">
+                    <li>Check HealthKit permissions in iOS Settings → Health → Data Access & Devices → StepWise</li>
+                    <li>Ensure your iPhone is tracking steps (requires iPhone 5s or newer)</li>
+                    <li>Try restarting the app or your device</li>
+                </ul>
+
+                <p><strong>Charts not displaying:</strong></p>
+                <ul style="margin: 10px 0 20px 20px;">
+                    <li>Historical data requires at least one day of recorded steps</li>
+                    <li>Weekly chart shows the last 7 days - walk around to generate data</li>
+                </ul>
+
+                <p><strong>Notifications not working:</strong></p>
+                <ul style="margin: 10px 0 20px 20px;">
+                    <li>Enable notifications in Settings → Notifications → StepWise</li>
+                    <li>Enable in-app notifications in StepWise Settings</li>
+                </ul>
+
+                <p><strong>Subscription not working:</strong></p>
+                <ul style="margin: 10px 0 20px 20px;">
+                    <li>Tap "Restore Purchases" in Settings</li>
+                    <li>Check your Apple ID subscriptions: Settings → [Your Name] → Subscriptions</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="privacy-note">
+            <strong>Privacy Commitment:</strong> StepWise is built with your privacy as the top priority. We don't collect, store, or share your personal information. Your health data stays on your device, always. Learn more in our <a href="https://aporay-dev.github.io/StepWise-Privacy/" style="color: #3b82f6; text-decoration: underline;">Privacy Policy</a>.
+        </div>
+
+        <div class="section">
+            <div class="contact-box">
+                <h3>Need More Help?</h3>
+                <p>Can't find the answer you're looking for? Our support team is here to help!</p>
+                <a href="mailto:info@myriadux.com">Contact Support</a>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #666; font-size: 0.9em;">
+            <p>StepWise by Myriad Tech Labs Inc.</p>
+            <p style="margin-top: 10px;">
+                <a href="https://aporay-dev.github.io/StepWise-Privacy/" style="color: #5856D6; text-decoration: none;">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
